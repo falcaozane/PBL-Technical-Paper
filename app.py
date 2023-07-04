@@ -127,3 +127,5 @@ st.pyplot(fig4)
 st.divider()
 
 st.subheader("Made by Zane Falcao and Jonathan Dabre")
+
+st.text("Credits for data Central Electricity Authority India & Energy Stattics India 2023")
