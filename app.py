@@ -58,7 +58,7 @@ st.write(data_sector)
 st.divider()
 
 # Generate a line chart for Yearwise Consumption of Electricity - Sectorwise
-fig2, ax2 = plt.subplots(figsize=(15, 15))
+fig2, ax2 = plt.subplots(figsize=(16, 16))
 
 sectors = ['Industry','Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
 colors = ['#5f77b4','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
@@ -77,13 +77,13 @@ st.pyplot(fig2)
 st.divider()
 
 # Generate a bar graph for Yearwise Consumption of Electricity - Sectorwise
-fig3, ax3 = plt.subplots(figsize=(18, 15))
+fig3, ax3 = plt.subplots(figsize=(18, 17))
 
 sectors = ['Industry','Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
 colors = ['#5f77b4','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
 
 x = data_sector['Year']
-bar_width = 0.14
+bar_width = 0.15
 
 for i, sector in enumerate(sectors):
     x_pos = [pos + i * bar_width for pos in range(len(x))]
