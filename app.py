@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 # Load the CSV data
 data_category = pd.read_csv("data.csv")
 data_sector = pd.read_csv("Sector.csv")
+data_consumption = pd.read_csv("consumption.csv")
 
 # Create a sidebar where the user can select a category
 selected_category = st.sidebar.selectbox("Select a category", data_category['Category'].unique())
@@ -102,6 +103,26 @@ plt.tight_layout()
 # Display the chart for Sector
 st.pyplot(fig3)
 
+st.divider()
+
+# Display the filtered data for Consumption
+st.write(data_consumption)
+
+st.divider()
+
+# Generate a bar graph for Per Capita Consumption
+fig4, ax4 = plt.subplots(figsize=(10, 6))
+x = data_consumption['Years']
+y = data_consumption['Per Capita Consumption']
+ax4.bar(x, y, color='#E8D217')
+ax4.set_xlabel('Years')
+ax4.set_ylabel('kWh')
+ax4.set_title('Per Capita Electricity Consumption (kWh)')
+ax4.set_xticklabels(x, rotation=45)
+plt.tight_layout()
+
+# Display the chart for Per Capita Consumption
+st.pyplot(fig4)
 
 st.divider()
 
