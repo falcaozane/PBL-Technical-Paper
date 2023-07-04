@@ -37,7 +37,7 @@ ax1_1.bar(filtered_data_category['Category'], filtered_data_category['Peak Deman
 ax1_1.bar(filtered_data_category['Category'], filtered_data_category['Peak Met'], label='Peak Met', bottom=filtered_data_category['Peak Demand'])
 ax1_1.set_xlabel('Category')
 ax1_1.set_ylabel('Value')
-ax1_1.set_title('Stacked Bar Graph - Peak Demand vs Peak Met (Category-wise)')
+ax1_1.set_title('Stacked Bar Graph - Peak Demand vs Peak Met (Month wise)')
 ax1_1.legend()
 
 # Pie chart (Category-wise)
