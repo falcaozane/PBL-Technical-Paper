@@ -2,12 +2,14 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.linear_model import LinearRegression
 
 # Load the CSV data
 data_category = pd.read_csv("data.csv")
 data_sector = pd.read_csv("Sector.csv")
 data_sector = data_sector.sort_values(by='Year')
 data_consumption = pd.read_csv("consumption.csv")
+data_predict = pd.read_csv("consumption-predict.csv")
 
 st.title("PayBill")
 st.divider()
@@ -161,6 +163,28 @@ st.divider()
 
 # Display the filtered data for Consumption
 st.write(data_consumption)
+
+# Extract the features (Years) and target variable (Per Capita Consumption)
+X = data_predict['Years'].values.reshape(-1, 1)
+y = data_predict['Per Capita Consumption'].values
+
+# Train the linear regression model
+regression_model = LinearRegression()
+regression_model.fit(X, y)
+
+# Years to predict
+years_to_predict = ['2022-23', '2023-24']
+
+# Predict the Per Capita Consumption for the given years
+X_pred = np.array([int(year.split('-')[0]) for year in years_to_predict]).reshape(-1, 1)
+y_pred = regression_model.predict(X_pred)
+
+# Create a DataFrame to display the predictions
+predictions_df = pd.DataFrame({'Years': years_to_predict, 'Per Capita Consumption': y_pred})
+
+# Display the predictions
+st.subheader("Per Capita Consumption Predictions (kWh)")
+st.write(predictions_df)
 
 st.divider()
 st.subheader("Made by: Zane Falcao & Jonathan Dabre")
