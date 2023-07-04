@@ -26,6 +26,8 @@ total_peak_met = filtered_data_category['Peak Met'].sum()
 pie_data = pd.DataFrame({'Category': ['Peak Demand', 'Peak Met'],
                          'Value': [total_peak_demand, total_peak_met]})
 
+st.write(data_category)
+
 # Display the filtered data for Category
 st.write(filtered_data_category)
 
