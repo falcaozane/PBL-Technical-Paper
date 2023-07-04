@@ -60,8 +60,8 @@ st.divider()
 # Generate a line chart for Yearwise Consumption of Electricity - Sectorwise
 fig2, ax2 = plt.subplots(figsize=(15, 15))
 
-sectors = ['Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
-colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
+sectors = ['Industry','Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
+colors = ['#5f77b4','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
 
 for sector, color in zip(sectors, colors):
     ax2.plot(data_sector['Year'], data_sector[sector], label=sector, marker='o', color=color)
@@ -77,13 +77,13 @@ st.pyplot(fig2)
 st.divider()
 
 # Generate a bar graph for Yearwise Consumption of Electricity - Sectorwise
-fig3, ax3 = plt.subplots(figsize=(15, 10))
+fig3, ax3 = plt.subplots(figsize=(18, 15))
 
-sectors = ['Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
-colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
+sectors = ['Industry','Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
+colors = ['#5f77b4','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
 
 x = data_sector['Year']
-bar_width = 0.15
+bar_width = 0.16
 
 for i, sector in enumerate(sectors):
     x_pos = [pos + i * bar_width for pos in range(len(x))]
@@ -105,4 +105,4 @@ st.pyplot(fig3)
 
 st.divider()
 
-st.text("Made by Zane Falcao and Jonathan Dabre")
+st.subheader("Made by Zane Falcao and Jonathan Dabre")
