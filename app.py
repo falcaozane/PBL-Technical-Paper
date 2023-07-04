@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import mplcursors
 
 # Load the CSV data
 data_category = pd.read_csv("data.csv")
@@ -119,6 +120,11 @@ ax4.set_xlabel('Years')
 ax4.set_ylabel('kWh')
 ax4.set_title('Per Capita Electricity Consumption (kWh)')
 ax4.set_xticklabels(x, rotation=30)
+
+# Add hover functionality to display values
+cursor = mplcursors.cursor(ax4, hover=True)
+cursor.connect("add", lambda sel: sel.annotation.set_text(f"{sel.target[1]} kWh"))
+
 plt.tight_layout()
 
 # Display the chart for Per Capita Consumption
