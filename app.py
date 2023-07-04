@@ -39,7 +39,7 @@ ax1_1.set_title('Stacked Bar Graph - Peak Demand vs Peak Met (Category-wise)')
 ax1_1.legend()
 
 # Pie chart (Category-wise)
-ax1_2.pie(pie_data['Value'], labels=pie_data['Category'], autopct='%1.1f%%')
+ax1_2.pie(pie_data['Value'], labels=pie_data['Category'], autopct='%2.2f%%')
 ax1_2.set_title(f'Pie Chart - Peak Demand vs Peak Met for {selected_category}')
 
 # Adjust spacing between subplots
