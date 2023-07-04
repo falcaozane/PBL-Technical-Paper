@@ -13,7 +13,8 @@ selected_category = st.sidebar.selectbox("Select a category", data_category['Cat
 filtered_data_category = data_category[data_category['Category'] == selected_category]
 
 st.title("PayBill")
-st.write("")
+st.divider()
+st.write("This is our research to make an electricity consumption calculator ")
 
 # Calculate the total Peak Demand and Peak Met for the selected category
 total_peak_demand = filtered_data_category['Peak Demand'].sum()
@@ -48,10 +49,13 @@ plt.tight_layout()
 
 # Display the charts for Category
 st.pyplot(fig1)
+st.divider()
 
 
 # Display the filtered data for Sector
 st.write(data_sector)
+
+st.divider()
 
 # Generate a line chart for Yearwise Consumption of Electricity - Sectorwise
 fig2, ax2 = plt.subplots(figsize=(15, 15))
@@ -69,6 +73,8 @@ ax2.legend()
 
 # Display the chart for Sector
 st.pyplot(fig2)
+
+st.divider()
 
 # Generate a bar graph for Yearwise Consumption of Electricity - Sectorwise
 fig3, ax3 = plt.subplots(figsize=(15, 10))
@@ -97,4 +103,6 @@ plt.tight_layout()
 st.pyplot(fig3)
 
 
-st.write("Made by Zane Falcao and Jonathan Dabre")
+st.divider()
+
+st.text("Made by Zane Falcao and Jonathan Dabre")
