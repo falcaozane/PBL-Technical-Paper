@@ -61,7 +61,7 @@ st.divider()
 fig2, ax2 = plt.subplots(figsize=(16, 16))
 
 sectors = ['Industry','Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
-colors = ['#5f77b4','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
+colors = ['#33FFBD','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
 
 for sector, color in zip(sectors, colors):
     ax2.plot(data_sector['Year'], data_sector[sector], label=sector, marker='o', color=color)
@@ -80,7 +80,7 @@ st.divider()
 fig3, ax3 = plt.subplots(figsize=(18, 17))
 
 sectors = ['Industry','Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
-colors = ['#5f77b4','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
+colors = ['#33FFBD','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
 
 x = data_sector['Year']
 bar_width = 0.15
