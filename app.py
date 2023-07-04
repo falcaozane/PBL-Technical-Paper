@@ -8,73 +8,54 @@ data_category = pd.read_csv("data.csv")
 data_sector = pd.read_csv("Sector.csv")
 data_consumption = pd.read_csv("consumption.csv")
 
-# Create a sidebar where the user can select a category
-selected_category = st.sidebar.selectbox("Select a category", data_category['Category'].unique())
-
-# Filter the data based on the selected category
-filtered_data_category = data_category[data_category['Category'] == selected_category]
 
 st.title("PayBill")
 st.divider()
-st.write("This is our research to make an electricity consumption calculator ")
+st.markdown("**:violet[This is our research to make an electricity consumption calculator]**")
 
-# Calculate the total Peak Demand and Peak Met for the selected category
-total_peak_demand = filtered_data_category['Peak Demand'].sum()
-total_peak_met = filtered_data_category['Peak Met'].sum()
+# Calculate the total Peak Demand and Peak Met for each category
+total_peak_demand = data_category.groupby('Category')['Peak Demand'].sum()
+total_peak_met = data_category.groupby('Category')['Peak Met'].sum()
 
-# Create a dataframe for the pie chart data
-pie_data = pd.DataFrame({'Category': ['Peak Demand', 'Peak Met'],
-                         'Value': [total_peak_demand, total_peak_met]})
+# Generate a bar graph for Peak Demand and Peak Met (Category-wise)
+fig, ax = plt.subplots(figsize=(12, 8))
+categories = data_category['Category']
+x = range(len(categories))
 
-# Display the filtered data for Category
-st.write(filtered_data_category)
+bar_width = 0.40
+ax.bar(x, total_peak_demand, label='Peak Demand', width=bar_width)
+ax.bar(x, total_peak_met, label='Peak Met', width=bar_width, bottom=total_peak_demand)
 
-# Generate a stacked bar chart for Peak Demand and Peak Met (Category-wise)
-fig1, (ax1_1, ax1_2) = plt.subplots(nrows=1, ncols=2, figsize=(12, 6))
+ax.set_xlabel('Month', fontsize=20,labelpad=20)
+ax.set_ylabel('Power Supply(MW): Peak Demand vs Peak Met', fontsize=20,labelpad=20)
+ax.set_title('Bar Graph - Peak Demand vs Peak Met (Category-wise)',fontdict={'fontsize': 20}, pad=10)
+ax.set_xticks(x)
+ax.set_xticklabels(categories, rotation=35)
+ax.legend()
 
-# Stacked bar chart (Category-wise)
-ax1_1.bar(filtered_data_category['Category'], filtered_data_category['Peak Demand'], label='Peak Demand')
-ax1_1.bar(filtered_data_category['Category'], filtered_data_category['Peak Met'], label='Peak Met', bottom=filtered_data_category['Peak Demand'])
-ax1_1.set_xlabel('Category')
-ax1_1.set_ylabel('Value')
-ax1_1.set_title('Stacked Bar Graph - Peak Demand vs Peak Met (Month wise)')
-ax1_1.legend()
-
-# Pie chart (Category-wise)
-ax1_2.pie(pie_data['Value'], labels=pie_data['Category'], autopct='%1.1f%%')
-ax1_2.set_title(f'Pie Chart - Peak Demand vs Peak Met for {selected_category}')
-
-# Adjust spacing between subplots
 plt.tight_layout()
 
-
-
-# Display the charts for Category
-st.pyplot(fig1)
+# Display the bar graph
+st.pyplot(fig)
 st.divider()
-
+st.write('Months | Peak-Demand(MW) | Peak-Met(MW)')
 st.write(data_category)
-
 st.divider()
 
-
-# Display the filtered data for Sector
-st.write(data_sector)
-
-st.divider()
 
 # Generate a line chart for Yearwise Consumption of Electricity - Sectorwise
-fig2, ax2 = plt.subplots(figsize=(16, 16))
+fig2, ax2 = plt.subplots(figsize=(18, 18))
 
 sectors = ['Industry','Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
 colors = ['#33FFBD','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
 
 for sector, color in zip(sectors, colors):
-    ax2.plot(data_sector['Year'], data_sector[sector], label=sector, marker='o', color=color)
+    ax2.plot(data_sector['Year'], data_sector[sector], label=sector, marker='^', color=color)
 
-ax2.set_xlabel('Year')
-ax2.set_ylabel('Electricity Consumed (GWh)')
-ax2.set_title('Yearwise Consumption of Electricity - Sectorwise')
+ax2.set_xlabel('Year',fontsize=20,labelpad=20)
+ax2.set_ylabel('Electricity Consumed (GWh)',fontsize=20,labelpad=20)
+ax2.spines['left'].set_color('magenta')
+ax2.set_title('Yearwise Consumption of Electricity - Sectorwise (line-graph)',fontdict={'fontsize': 20}, pad=10)
 ax2.legend()
 
 # Display the chart for Sector
@@ -83,21 +64,21 @@ st.pyplot(fig2)
 st.divider()
 
 # Generate a bar graph for Yearwise Consumption of Electricity - Sectorwise
-fig3, ax3 = plt.subplots(figsize=(18, 17))
+fig3, ax3 = plt.subplots(figsize=(18, 18))
 
 sectors = ['Industry','Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
 colors = ['#33FFBD','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
 
 x = data_sector['Year']
-bar_width = 0.15
+bar_width = 0.14
 
 for i, sector in enumerate(sectors):
     x_pos = [pos + i * bar_width for pos in range(len(x))]
     ax3.bar(x_pos, data_sector[sector], label=sector, color=colors[i], width=bar_width)
 
-ax3.set_xlabel('Year')
-ax3.set_ylabel('Electricity Consumed (GWh)')
-ax3.set_title('Yearwise Consumption of Electricity - Sectorwise')
+ax3.set_xlabel('Year',fontsize=20,labelpad=20)
+ax3.set_ylabel('Electricity Consumed (GWh)',fontsize=20,labelpad=20)
+ax3.set_title('Yearwise Consumption of Electricity - Sectorwise (bar-graph)',fontdict={'fontsize': 20}, pad=10)
 ax3.set_xticks(range(len(x)))
 ax3.set_xticklabels(x)
 ax3.legend()
@@ -120,9 +101,9 @@ fig4, ax4 = plt.subplots(figsize=(10, 6))
 x = data_consumption['Years']
 y = data_consumption['Per Capita Consumption']
 ax4.bar(x, y, color='#E8D217')
-ax4.set_xlabel('Years')
-ax4.set_ylabel('kWh')
-ax4.set_title('Per Capita Electricity Consumption (kWh)')
+ax4.set_xlabel('Years',fontsize=20,labelpad=20)
+ax4.set_ylabel('kWh',fontsize=20,labelpad=20)
+ax4.set_title('Per Capita Electricity Consumption (kWh)',fontdict={'fontsize': 20}, pad=10)
 ax4.set_xticklabels(x, rotation=30)
 
 
