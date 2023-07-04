@@ -129,4 +129,4 @@ st.divider()
 st.subheader("Made by Zane Falcao and Jonathan Dabre")
 
 st.text("")
-st.markdown("Credits for data : **:blue[Central Electricity Authority India & Energy Stattics India 2023]** ")
+st.markdown("Credits for data : **:blue[Central Electricity Authority India & Energy Statistics India 2023]** ")
