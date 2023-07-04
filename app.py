@@ -118,7 +118,7 @@ ax4.bar(x, y, color='#E8D217')
 ax4.set_xlabel('Years')
 ax4.set_ylabel('kWh')
 ax4.set_title('Per Capita Electricity Consumption (kWh)')
-ax4.set_xticklabels(x, rotation=45)
+ax4.set_xticklabels(x, rotation=30)
 plt.tight_layout()
 
 # Display the chart for Per Capita Consumption
@@ -128,4 +128,5 @@ st.divider()
 
 st.subheader("Made by Zane Falcao and Jonathan Dabre")
 
-st.text("Credits for data Central Electricity Authority India & Energy Stattics India 2023")
+st.text("")
+st.markdown("Credits for data : **:blue[Central Electricity Authority India & Energy Stattics India 2023]** ")
