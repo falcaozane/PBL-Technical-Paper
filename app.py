@@ -50,7 +50,7 @@ sectors = ['Industry','Agriculture', 'Domestic', 'Commercial', 'Traction & Railw
 colors = ['#33FFBD','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
 
 for sector, color in zip(sectors, colors):
-    ax2.plot(data_sector['Year'], data_sector[sector], label=sector, marker='^', color=color)
+    ax2.plot(data_sector['Year'], data_sector[sector], label=sector, marker='^', color=color, linewidth=3)
 
 ax2.set_xlabel('Year',fontsize=20,labelpad=20)
 ax2.set_ylabel('Electricity Consumed (GWh)',fontsize=20,labelpad=20)
