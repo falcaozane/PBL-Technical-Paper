@@ -26,8 +26,6 @@ total_peak_met = filtered_data_category['Peak Met'].sum()
 pie_data = pd.DataFrame({'Category': ['Peak Demand', 'Peak Met'],
                          'Value': [total_peak_demand, total_peak_met]})
 
-st.write(data_category)
-
 # Display the filtered data for Category
 st.write(filtered_data_category)
 
@@ -53,6 +51,10 @@ plt.tight_layout()
 
 # Display the charts for Category
 st.pyplot(fig1)
+st.divider()
+
+st.write(data_category)
+
 st.divider()
 
 
