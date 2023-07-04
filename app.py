@@ -83,7 +83,7 @@ sectors = ['Industry','Agriculture', 'Domestic', 'Commercial', 'Traction & Railw
 colors = ['#5f77b4','#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
 
 x = data_sector['Year']
-bar_width = 0.16
+bar_width = 0.14
 
 for i, sector in enumerate(sectors):
     x_pos = [pos + i * bar_width for pos in range(len(x))]
