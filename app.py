@@ -95,3 +95,6 @@ plt.tight_layout()
 
 # Display the chart for Sector
 st.pyplot(fig3)
+
+
+st.write("Made by Zane Falcao and Jonathan Dabre")
