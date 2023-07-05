@@ -178,6 +178,7 @@ ax6.set_xlabel('Years', fontsize=20, labelpad=20)
 ax6.set_ylabel('kWh', fontsize=20, labelpad=20)
 ax6.set_title('Per Capita Electricity Consumption (kWh)', fontdict={'fontsize': 20}, pad=10)
 ax6.set_xticklabels(x, rotation=30)
+ax6.legend()
 
 plt.tight_layout()
 
