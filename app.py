@@ -45,52 +45,72 @@ st.write('Months | Peak-Demand(MW) | Peak-Met(MW)')
 st.write(data_category)
 st.divider()
 
-fig2, ax2 = plt.subplots(figsize=(18, 18))
+# Extract the features (Months) and target variable (Peak Demand)
+X = data_category['Month.no'].values.reshape(-1, 1)
+y = data_category['Peak Demand']
 
-sectors = ['Industry', 'Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
-colors = ['#33FFBD', '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
+# Train the linear regression model
+regression_model = LinearRegression()
+regression_model.fit(X, y)
 
-max_value = data_sector[sectors].values.max()  # Get the maximum value from all sectors
+# Months to predict
+months_to_predict = ['Apr-23', 'May-23', 'Jun-23', 'Jul-23', 'Aug-23', 'Sep-23', 'Oct-23', 'Nov-23', 'Dec-23', 'Jan-24']
 
-for sector, color in zip(sectors, colors):
-    ax2.plot(data_sector['Year'], data_sector[sector], label=sector, marker='^', color=color, linewidth=3)
+# Predict the Peak Demand for the given months
+X_pred = np.array([pd.to_datetime(month, format='%b-%y').month for month in months_to_predict]).reshape(-1, 1)
+y_pred = regression_model.predict(X_pred)
+
+# Create a DataFrame to display the predictions
+predictions_df = pd.DataFrame({'Months': months_to_predict, 'Peak Demand': y_pred})
+
+# Display the predictions
+st.subheader("Peak Demand Predictions (in MW) from April 2023 - January 2024")
+st.write(predictions_df)
+
+st.divider()
+
+# Add a select box to choose a sector
+selected_sector = st.selectbox('Select a sector', ['Industry', 'Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others'])
+
+# Generate a line graph for Yearwise Consumption of Electricity - Sectorwise
+fig2, ax2 = plt.subplots(figsize=(8, 6))
+x = data_sector['Year']
+ax2.plot(x, data_sector[selected_sector], label=selected_sector, marker='^', color='blue', linewidth=2)
 
 ax2.set_xlabel('Year', fontsize=20, labelpad=20)
 ax2.set_ylabel('Electricity Consumed (GWh)', fontsize=20, labelpad=20)
 ax2.spines['left'].set_color('magenta')
-ax2.set_title('Yearwise Consumption of Electricity - Sectorwise (line-graph)', fontdict={'fontsize': 20}, pad=10)
+ax2.spines['bottom'].set_color('magenta')
+ax2.set_xticklabels(x,rotation=25)
+ax2.set_title(f'Yearwise Consumption of Electricity - {selected_sector}', fontdict={'fontsize': 20}, pad=10)
 ax2.legend()
 
-# Display the chart for Sector
+# Display the chart for the selected sector
 st.pyplot(fig2)
 
 st.divider()
 
 # Generate a bar graph for Yearwise Consumption of Electricity - Sectorwise
-fig3, ax3 = plt.subplots(figsize=(18, 18))
-
-sectors = ['Industry', 'Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others']
-colors = ['#33FFBD', '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
-
+fig3, ax3 = plt.subplots(figsize=(8, 6))
 x = data_sector['Year']
-bar_width = 0.14
+bar_width = 0.5
 
-for i, sector in enumerate(sectors):
-    x_pos = [pos + i * bar_width for pos in range(len(x))]
-    ax3.bar(x_pos, data_sector[sector], label=sector, color=colors[i], width=bar_width)
+ax3.bar(x, data_sector[selected_sector], label=selected_sector, color='magenta', width=bar_width)
 
 ax3.set_xlabel('Year', fontsize=20, labelpad=20)
 ax3.set_ylabel('Electricity Consumed (GWh)', fontsize=20, labelpad=20)
-ax3.set_title('Yearwise Consumption of Electricity - Sectorwise (bar-graph)', fontdict={'fontsize': 20}, pad=10)
+ax3.set_title(f'Yearwise Consumption of Electricity - {selected_sector}', fontdict={'fontsize': 20}, pad=10)
 ax3.set_xticks(range(len(x)))
-ax3.set_xticklabels(x)
+ax3.set_xticklabels(x,rotation=25)
 ax3.legend()
 
 # Adjust spacing between subplots
 plt.tight_layout()
 
-# Display the chart for Sector
+# Display the chart for the selected sector
 st.pyplot(fig3)
+
+
 
 st.divider()
 
@@ -132,8 +152,8 @@ fig5, ax5 = plt.subplots(figsize=(10, 10), subplot_kw=dict(polar=True))
 theta = np.linspace(0, 2 * np.pi, len(labels), endpoint=False)
 values = np.concatenate((values, [values[0]]))  # Close the plot
 theta = np.concatenate((theta, [theta[0]]))  # Close the plot
-ax5.plot(theta, values, color='blue', marker='*')
-ax5.fill(theta, values, color='blue', alpha=0.25)
+ax5.plot(theta, values, color='orange', marker='*')
+ax5.fill(theta, values, color='orange', alpha=0.35)
 
 ax5.set_xticks(theta[:-1])
 ax5.set_xticklabels(labels, fontsize=10, fontdict={'verticalalignment': 'bottom'})
