@@ -73,7 +73,7 @@ st.divider()
 selected_sector = st.selectbox('Select a sector', ['Industry', 'Agriculture', 'Domestic', 'Commercial', 'Traction & Railways', 'Others'])
 
 # Generate a line graph for Yearwise Consumption of Electricity - Sectorwise
-fig2, ax2 = plt.subplots(figsize=(8, 6))
+fig2, ax2 = plt.subplots(figsize=(8, 5))
 x = data_sector['Year']
 ax2.plot(x, data_sector[selected_sector], label=selected_sector, marker='^', color='blue', linewidth=2)
 
@@ -81,7 +81,7 @@ ax2.set_xlabel('Year', fontsize=20, labelpad=20)
 ax2.set_ylabel('Electricity Consumed (GWh)', fontsize=20, labelpad=20)
 ax2.spines['left'].set_color('magenta')
 ax2.spines['bottom'].set_color('magenta')
-ax2.set_xticklabels(x,rotation=25)
+ax2.set_xticklabels(x,rotation=75)
 ax2.set_title(f'Yearwise Consumption of Electricity - {selected_sector}', fontdict={'fontsize': 20}, pad=10)
 ax2.legend()
 
@@ -93,15 +93,16 @@ st.divider()
 # Generate a bar graph for Yearwise Consumption of Electricity - Sectorwise
 fig3, ax3 = plt.subplots(figsize=(8, 6))
 x = data_sector['Year']
+y = data_sector[selected_sector]
 bar_width = 0.5
 
-ax3.bar(x, data_sector[selected_sector], label=selected_sector, color='magenta', width=bar_width)
+ax3.bar(x, y, label=selected_sector, color='magenta', width=bar_width)
 
 ax3.set_xlabel('Year', fontsize=20, labelpad=20)
 ax3.set_ylabel('Electricity Consumed (GWh)', fontsize=20, labelpad=20)
 ax3.set_title(f'Yearwise Consumption of Electricity - {selected_sector}', fontdict={'fontsize': 20}, pad=10)
 ax3.set_xticks(range(len(x)))
-ax3.set_xticklabels(x,rotation=25)
+ax3.set_xticklabels(x,rotation=80)
 ax3.legend()
 
 # Adjust spacing between subplots
