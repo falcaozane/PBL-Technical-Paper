@@ -102,7 +102,9 @@ st.divider()
 years = data_sector['Year'].unique()
 
 # Allow the user to select a specific year
-selected_year = st.selectbox('Select a year', years)
+original_title = '<p style="font-family:Sans-serif; color:purple; font-size: 30px;">Select a year</p>'
+st.markdown(original_title, unsafe_allow_html=True)
+selected_year = st.selectbox('Year', years)
 
 # Filter the data_sector DataFrame based on the selected year
 filtered_data = data_sector[data_sector['Year'] == selected_year]
