@@ -6,8 +6,7 @@ from sklearn.linear_model import LinearRegression
 
 # Load the CSV data
 data_category = pd.read_csv("data.csv")
-data_sector = pd.read_csv("Sector.csv")
-data_sector = data_sector.sort_values(by='Year')
+data_sector = pd.read_csv("sector.csv")
 data_consumption = pd.read_csv("consumption.csv")
 data_predict = pd.read_csv("consumption-predict.csv")
 
@@ -74,8 +73,9 @@ selected_sector = st.selectbox('Select a sector', ['Industry', 'Agriculture', 'D
 
 # Generate a line graph for Yearwise Consumption of Electricity - Sectorwise
 fig2, ax2 = plt.subplots(figsize=(8, 5))
-x = data_sector['Year']
-ax2.plot(x, data_sector[selected_sector], label=selected_sector, marker='^', color='blue', linewidth=2)
+x = data_sector['Years']
+y = data_sector[selected_sector]
+ax2.plot(x, y, label=selected_sector, marker='^', color='blue', linewidth=2)
 
 ax2.set_xlabel('Year', fontsize=20, labelpad=20)
 ax2.set_ylabel('Electricity Consumed (GWh)', fontsize=20, labelpad=20)
@@ -92,8 +92,10 @@ st.divider()
 
 # Generate a bar graph for Yearwise Consumption of Electricity - Sectorwise
 fig3, ax3 = plt.subplots(figsize=(8, 6))
-x = data_sector['Year']
+x = data_sector['Years']
 y = data_sector[selected_sector]
+
+
 bar_width = 0.5
 
 ax3.bar(x, y, label=selected_sector, color='magenta', width=bar_width)
@@ -101,7 +103,7 @@ ax3.bar(x, y, label=selected_sector, color='magenta', width=bar_width)
 ax3.set_xlabel('Year', fontsize=20, labelpad=20)
 ax3.set_ylabel('Electricity Consumed (GWh)', fontsize=20, labelpad=20)
 ax3.set_title(f'Yearwise Consumption of Electricity - {selected_sector}', fontdict={'fontsize': 20}, pad=10)
-ax3.set_xticks(range(len(x)))
+#ax3.set_xticks(range(len(x)))
 ax3.set_xticklabels(x,rotation=80)
 ax3.legend()
 
@@ -120,15 +122,15 @@ st.write(data_sector)
 st.divider()
 
 # Retrieve the unique years from the Sector.csv file
-years = data_sector['Year'].unique()
+years = data_sector['Years'].unique()
 
 # Allow the user to select a specific year
 original_title = '<p style="font-family:Sans-serif; color:purple; font-size: 30px;">Select a year</p>'
 st.markdown(original_title, unsafe_allow_html=True)
-selected_year = st.selectbox('Year', years)
+selected_year = st.selectbox('Years', years)
 
 # Filter the data_sector DataFrame based on the selected year
-filtered_data = data_sector[data_sector['Year'] == selected_year]
+filtered_data = data_sector[data_sector['Years'] == selected_year]
 
 # Get the values for the pie chart
 values = filtered_data[['IndustryPer', 'AgriPer', 'DomPer', 'ComPer', 'TrPer', 'OtherPer']].values.flatten()
