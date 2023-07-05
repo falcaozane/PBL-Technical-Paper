@@ -6,7 +6,7 @@ from sklearn.linear_model import LinearRegression
 
 # Load the CSV data
 data_category = pd.read_csv("data.csv")
-data_sector = pd.read_csv("sector.csv")
+data_sector = pd.read_csv("Sector.csv")
 data_consumption = pd.read_csv("consumption.csv")
 data_predict = pd.read_csv("consumption-predict.csv")
 
