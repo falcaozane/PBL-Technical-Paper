@@ -230,7 +230,7 @@ predictions_df = pd.DataFrame({'Years': years_to_predict, 'Per Capita Consumptio
 
 # Display the predictions
 st.subheader("Per Capita Consumption Predictions (kWh)")
-st.markdown("**:orange[Calculated by performing linear regression (Skit-Learn) on existing values]**")
+st.markdown("**:orange[Calculated by performing linear regression (Scikit-Learn) on existing values]**")
 st.write(predictions_df)
 
 st.divider()

@@ -2,4 +2,4 @@
 
 statistical analysis of electricity consumption in India 
 
-made using Python (Streamlit, Pandas, Matplotlib)
+made using Python (Streamlit, Pandas, Matplotlib, Scikit-Learn)
