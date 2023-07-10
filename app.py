@@ -14,30 +14,47 @@ st.title("PayBill")
 st.divider()
 st.markdown("**:violet[This is our research to make an electricity consumption calculator]**")
 
+import numpy as np
+
 # Calculate the total Peak Demand and Peak Met for each category
 total_peak_demand = data_category.groupby('Category')['Peak Demand'].sum()
 total_peak_met = data_category.groupby('Category')['Peak Met'].sum()
 
-# Generate a bar graph for Peak Demand and Peak Met (Category-wise)
-fig, ax = plt.subplots(figsize=(12, 8))
+# Generate a dual-axis line graph for Peak Demand and Peak Met (Category-wise)
+fig, ax1 = plt.subplots(figsize=(12, 8))
 categories = data_category['Category']
-x = range(len(categories))
+x = np.arange(len(categories))
 
-bar_width = 0.40
-ax.bar(x, total_peak_demand, label='Peak Demand', width=bar_width)
-ax.bar(x, total_peak_met, label='Peak Met', width=bar_width, bottom=total_peak_demand)
+# Plot the Peak Demand as a line plot
+ax1.plot(x, total_peak_demand, marker='v', label='Peak Demand')
+ax1.set_xlabel('Months', fontsize=20, labelpad=20)
+ax1.set_ylabel('Peak Demand', fontsize=20, labelpad=20)
+ax1.tick_params(axis='y')
+ax1.legend(loc='upper left')
 
-ax.set_xlabel('Month', fontsize=20, labelpad=20)
-ax.set_ylabel('Power Supply(MW): Peak Demand vs Peak Met', fontsize=20, labelpad=20)
-ax.set_title('Bar Graph - Peak Demand vs Peak Met (Category-wise)', fontdict={'fontsize': 20}, pad=10)
-ax.set_xticks(x)
-ax.set_xticklabels(categories, rotation=35)
-ax.legend()
+# Create a second y-axis
+ax2 = ax1.twinx()
 
+# Plot the Peak Met as a line plot
+ax2.plot(x, total_peak_met, marker='^', color='tab:orange', label='Peak Met')
+ax2.set_ylabel('Peak Met', fontsize=20, labelpad=20)
+ax2.tick_params(axis='y')
+ax2.legend(loc='upper right')
+
+# Set the x-axis ticks and labels
+ax1.set_xticks(x)
+ax1.set_xticklabels(categories, rotation=35)
+
+# Set the title
+ax1.set_title('Dual-Axis Line Graph - Peak Demand vs Peak Met (Month-wise)', fontdict={'fontsize': 20}, pad=20)
+ax1.legend(loc='lower left')
+ax2.legend(loc='lower right')
 plt.tight_layout()
 
-# Display the bar graph
+# Display the line graph
 st.pyplot(fig)
+
+st.markdown("**:green[After visualizing the data we can conclude that the demand for electricity was only met in the months of Feb, May, August & November.]**")
 
 st.divider()
 st.write('Months | Peak-Demand(MW) | Peak-Met(MW)')
@@ -63,8 +80,11 @@ y_pred = regression_model.predict(X_pred)
 predictions_df = pd.DataFrame({'Months': months_to_predict, 'Peak Demand': y_pred})
 
 # Display the predictions
-st.subheader("Peak Demand Predictions (in MW) from April 2023 - January 2024")
+st.subheader("Peak Demand Predictions (in MW) from April 2030 to January 2024")
+st.markdown("**:orange[Calculated by performing linear regression (Skit-Learn) on existing values]**")
 st.write(predictions_df)
+
+
 
 st.divider()
 
