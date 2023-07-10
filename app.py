@@ -81,7 +81,7 @@ predictions_df = pd.DataFrame({'Months': months_to_predict, 'Peak Demand': y_pre
 
 # Display the predictions
 st.subheader("Peak Demand Predictions (in MW) from April 2030 to January 2024")
-st.markdown("**:orange[Calculated by performing linear regression (Skit-Learn) on existing values]**")
+st.markdown("**:orange[Calculated by performing Linear regression(Scikit-Learn) on existing values]**")
 st.write(predictions_df)
 
 
