@@ -53,7 +53,8 @@ plt.tight_layout()
 
 # Display the line graph
 st.pyplot(fig)
-
+st.markdown("**:orange[Dual-Axis Line Graph - Peak Demand vs Peak Met (Month-wise): ]**")
+st.markdown("The dual-axis line graph compares the peak demand and peak met values for every month. It allows for a direct comparison of the two variables on separate y-axes. The graph shows the variation between peak demand and peak met across every month,indicating the effectiveness of meeting the peak power demand.By analyzing this graph, it becomes evident which categories consistently meet or exceed peak demand and which categories may need further attention to ensure sufficient power supply during peak periods.")
 st.markdown("**:green[After visualizing the data we can conclude that the demand for electricity was only met in the months of Feb, May, August & November.]**")
 
 st.divider()
@@ -139,6 +140,8 @@ st.divider()
 
 st.write(data_sector)
 
+st.markdown("**:orange[Sector wise distribution of electricity consumption using line and bar graph over the years ]**")
+
 st.divider()
 
 # Retrieve the unique years from the Sector.csv file
@@ -187,6 +190,8 @@ ax5.set_yticks(range(0, 45, 5))  # Set y-axis ticks from 0 to 100 with steps of 
 # Display the radar plot
 st.pyplot(fig5)
 
+st.markdown("**:orange[Sector wise percentage distribution of electricity consumption using pie and radar plot over the years ]**")
+st.markdown("From the graphs we can see that Industry sector has the highest comsumption( always greater than 40%). With automation and electrification in Agriculture sector has seen a steep rise in electricity consumption.")
 st.divider()
 
 # Generate a bar graph for Per Capita Consumption
@@ -232,6 +237,8 @@ predictions_df = pd.DataFrame({'Years': years_to_predict, 'Per Capita Consumptio
 st.subheader("Per Capita Consumption Predictions (kWh)")
 st.markdown("**:orange[Calculated by performing linear regression (Scikit-Learn) on existing values]**")
 st.write(predictions_df)
+st.markdown("**:orange[Conclusion for Per Capita Electricity Consumption Graph: ]**")
+st.markdown("The Per Capita Electricity Consumption graph showcases the average electricity consumption per person over a specific time period. It provides insights into the electricity consumption patterns of a population and can be indicative of energy usage, lifestyle, and economic factors.From the graph, it can be observed that the per capita electricity consumption has experienced a gradual increase over time. This may indicate a rise in living standards, economic growth, and increased access to electrical appliances and technologies. The graph also reveals fluctuations and variations in consumption, which could be attributed to seasonal variations, changes in energy policies, or shifts in population demographics. In the year 2020-21 the consumption decreased because of Covid-19. Understanding per capita electricity consumption is essential for energy planning, policy-making, and sustainability efforts. It helps identify areas of high or low energy consumption, allowing policymakers and energy providers to develop targeted strategies for energy conservation, efficiency, and renewable energy adoption. Additionally, it can assist in evaluating the impact of energy-saving initiatives and promoting awareness among individuals and communities about responsible electricity usage. Overall, the Per Capita Electricity Consumption graph provides valuable insights into the trends and patterns of electricity consumption per person. It serves as a tool for policymakers, energy planners, and individuals to make informed decisions regarding energy conservation, efficiency measures, and the transition to cleaner and sustainable energy sources.**:green[ With more evolution and development the consumption rate is set to increase.]**")
 
 st.divider()
 st.subheader("Made by: Zane Falcao & Jonathan Dabre")
