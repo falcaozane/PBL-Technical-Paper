@@ -192,7 +192,7 @@ ax5.set_yticks(range(0, 45, 5))  # Set y-axis ticks from 0 to 100 with steps of 
 st.pyplot(fig5)
 
 st.markdown("**:orange[Sector wise percentage distribution of electricity consumption using pie and radar plot over the years ]**")
-st.markdown("From the graphs we can see that Industry sector has the highest comsumption( always greater than 40%). With automation and electrification in Agriculture sector has seen a steep rise in electricity consumption.")
+st.markdown("From the graphs, we can see that the Industry sector has the highest consumption ( always greater than 40%). Automation and electrification in the Agriculture sector have seen a steep rise in electricity consumption.")
 st.divider()
 
 # Generate a bar graph for Per Capita Consumption
